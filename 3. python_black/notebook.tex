@@ -398,29 +398,62 @@
     \hypertarget{ux5e38ux7528ux7684sqlalchemyux5b57ux6bb5ux7c7bux578b}{%
 \section{常用的SQLAlchemy字段类型}\label{ux5e38ux7528ux7684sqlalchemyux5b57ux6bb5ux7c7bux578b}}
 
-\begin{figure}
-\centering
-\includegraphics{attachment:image.png}
-\caption{image.png}
-\end{figure}
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+类型名 & python中类型 & 说明\tabularnewline
+\midrule
+\endhead
+Integer & int & 普通整数，一般是32位\tabularnewline
+SmallInteger & int & 取值范围小的整数，一般是16位\tabularnewline
+BigInteger & int或long & 不限制精度的整数\tabularnewline
+Float & float & 浮点数\tabularnewline
+Numeric & decimal.Decimal & 普通整数，一般是32位\tabularnewline
+String & str & 变长字符串\tabularnewline
+Text & str & 变长字符串，对较长或不限长度的字符串做了优化\tabularnewline
+Unicode & unicode & 变长Unicode字符串\tabularnewline
+UnicodeText & unicode &
+变长Unicode字符串，对较长或不限长度的字符串做了优化\tabularnewline
+Boolean & bool & 布尔值\tabularnewline
+Date & datetime.date & 时间\tabularnewline
+Time & datetime.datetime & 日期和时间\tabularnewline
+LargeBinary & str & 二进制文件\tabularnewline
+\bottomrule
+\end{longtable}
 
     \hypertarget{ux5e38ux7528ux7684sqlalchemyux5217ux9009ux9879}{%
 \section{常用的SQLAlchemy列选项}\label{ux5e38ux7528ux7684sqlalchemyux5217ux9009ux9879}}
 
-\begin{figure}
-\centering
-\includegraphics{attachment:image.png}
-\caption{image.png}
-\end{figure}
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+选项名 & 说明\tabularnewline
+\midrule
+\endhead
+primary\_key & 如果为True，代表表的主键\tabularnewline
+unique & 如果为True，代表这列不允许出现重复的值\tabularnewline
+index & 如果为True，为这列创建索引，提高查询效率\tabularnewline
+nullable &
+如果为True，允许有空值，如果为False，不允许有空值\tabularnewline
+default & 为这列定义默认值\tabularnewline
+\bottomrule
+\end{longtable}
 
     \hypertarget{ux5e38ux7528ux7684sqlalchemyux5173ux7cfbux9009ux9879}{%
 \section{常用的SQLAlchemy关系选项}\label{ux5e38ux7528ux7684sqlalchemyux5173ux7cfbux9009ux9879}}
 
-\begin{figure}
-\centering
-\includegraphics{attachment:image.png}
-\caption{image.png}
-\end{figure}
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+选项名 & 说明\tabularnewline
+\midrule
+\endhead
+backref & 在关系的另一模型中添加反向引用\tabularnewline
+primary join & 明确指定两个模型之间使用的联结条件\tabularnewline
+uselist & 如果为False，不使用列表，而使用标量值\tabularnewline
+order\_by & 指定关系中记录的排序方式\tabularnewline
+secondary & 指定多对多中记录的排序方式\tabularnewline
+secondary join &
+在SQLAlchemy中无法自行决定时，指定多对多关系中的二级联结条件\tabularnewline
+\bottomrule
+\end{longtable}
 
     \hypertarget{ux5b9aux4e49ux6a21ux578bux7c7b}{%
 \section{定义模型类}\label{ux5b9aux4e49ux6a21ux578bux7c7b}}
@@ -588,6 +621,44 @@
 \item
   User.query.order\_by(User.id.desc()).all() \# 降序
 \end{itemize}
+
+    \hypertarget{ux5e38ux7528ux7684sqlalchemyux67e5ux8be2ux8fc7ux6ee4ux5668}{%
+\section{常用的SQLAlchemy查询过滤器}\label{ux5e38ux7528ux7684sqlalchemyux67e5ux8be2ux8fc7ux6ee4ux5668}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+过滤器 & 说明\tabularnewline
+\midrule
+\endhead
+filter() & 把过滤器添加到原查询上，返回一个新查询\tabularnewline
+filter\_by() & 把等值过滤器添加到原查询上，返回一个新查询\tabularnewline
+limit & 使用指定的值限定原查询返回的结果\tabularnewline
+offset() & 偏移原查询返回的结果，返回一个新查询\tabularnewline
+order\_by() &
+根据指定条件对原查询结果进行排序，返回一个新查询\tabularnewline
+group\_by() &
+根据指定条件对原查询结果进行分组，返回一个新查询\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \hypertarget{ux5e38ux7528ux7684sqlalchemyux67e5ux8be2ux6267ux884cux5668}{%
+\section{常用的SQLAlchemy查询执行器}\label{ux5e38ux7528ux7684sqlalchemyux67e5ux8be2ux6267ux884cux5668}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+方法 & 说明\tabularnewline
+\midrule
+\endhead
+all() & 以列表形式返回查询的所有结果\tabularnewline
+first() & 返回查询的第一个结果，如果未查到，返回None\tabularnewline
+first\_or\_404() &
+返回查询的第一个结果，如果未查到，返回404\tabularnewline
+get() & 返回指定主键对应的行，如不存在，返回None\tabularnewline
+get\_or\_404() & 返回指定主键对应的行，如不存在，返回404\tabularnewline
+count() & 返回查询结果的数量\tabularnewline
+paginate() & 返回一个Paginate对象，它包含指定范围内的结果\tabularnewline
+\bottomrule
+\end{longtable}
 
     \hypertarget{ux6570ux636eux5e93ux8fc1ux79fb}{%
 \section{数据库迁移}\label{ux6570ux636eux5e93ux8fc1ux79fb}}
